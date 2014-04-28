@@ -1,5 +1,6 @@
 /* This will test the heap ADT */
 #include "heap.h"
+#include "insertionsort.h"
 #include "myinclude.h"
 
 int main ()

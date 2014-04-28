@@ -70,7 +70,6 @@ void deleteMax(HeapHndl H)
 			max = H->heap[i];
 		}
 	}
-	H->heap[maxIndex] = NULL;
 	H->heap[maxIndex] = H->heap[currSize];
 	H->heap[currSize] = NULL;
 }
