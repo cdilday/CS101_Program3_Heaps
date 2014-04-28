@@ -7,7 +7,9 @@
 
 typedef struct HeapStruct 
 {
-	int (*heap)[];
+	int maxSize = 1000;
+	int currSize = 0;
+	int (*heap)[maxSize];
 } HeapStruct;
 
 /* CONSTRUCTORS / DESTRUCTORS */
@@ -20,269 +22,55 @@ HeapHndl NewHeap ()
 	return tempHeap;
 }
 
-/*void freeList (ListHndl * L)
+void freeHeap (HeapHndl * H)
 {
-	NodePtr tempCurr;
-	assert((*L) != NULL);
-	/*FREE THE NODES! */
-	/*tempCurr = (*(L))->first;
-	(*(L))->curr = (*(L))->first;
-	while((*(L))->curr != NULL)
+	assert((*H) != NULL);
+	free((*H));
+	(*H) = NULL;
+	(*H).currSize = 0;
+	printf( "Freed the heap! \n" );
+}
+
+Boolean isEmpty(HeapHndl H) 
+{
+	assert (H != NULL);
+	return (H.currSize == 0);
+}
+
+Boolean isEmpty(HeapHndl H) 
+{
+	assert (H != NULL);
+	return (H.currSize == H.maxSize );
+}
+
+int maxValue(HeapHandl H)
+{
+	assert (H != NULL);
+	int max  = 0;
+	for( int i = 0; i < H.currSize; i++)
 	{
-		tempCurr = (*(L))->curr->next;
-		free((*(L))->curr); 
-		(*(L))->curr = tempCurr;
+		if(H->heap[i] > max)
+		{
+			max = H->heap[i];
+		}
 	}
-	(*(L))->first = NULL;
-	(*(L))->curr = NULL;
-	(*(L))->last = NULL;
-	free((*L));
-	(*L) = NULL;
-	/*printf( "Freed the list! \n" );*/
-/*}
-
-int isEmpty(ListHndl L) 
-{
-	assert (L != NULL);
-	return (L->first == NULL);
+	return max;
 }
 
-int offEnd(ListHndl L) 
+void deleteMax(HeapHndl H)
 {
-	assert (L != NULL);
-	return (L->curr == NULL);
-}
-
-int atFirst(ListHndl L)
-{
-	assert (L != NULL);
-	return ( (L->curr == L->first) && offEnd(L) == 1 );
-}
-
-int atLast(ListHndl L)
-{
-	assert (L != NULL);
-	return ( (L-> curr == L->last) && offEnd(L) == 1 );
-}
-
-long getFirst(ListHndl L)
-{
-	assert (L != NULL);
-	assert (L->first != NULL);
-	return (L->first->data);
-}
-
-long getLast(ListHndl L)
-{
-	assert (L != NULL);
-	assert (L->last != NULL);
-	return (L->last->data);
-}
-long getCurrent(ListHndl L)
-{
-	assert (L != NULL);
-	assert (L->curr != NULL);
-	return (L->curr->data);
-}
-
-void insertAtFront(ListHndl L, long data)
-{
-	NodePtr tempNode;
-	assert (L != NULL);
-	tempNode = malloc ( sizeof(NodeStruct) );
-
-	tempNode->data = data;
-	tempNode->next = L->first;
-	tempNode->prev = NULL;
-
-	if(L->first == NULL)
-	/*this means we're adding the first element, meaning L needs to have curr, first, & last assigned.*/
-	/*{ 
-		L->first = tempNode;
-		L->last = tempNode;
-		L->curr = tempNode;
-	}
-	else
+	assert (H != NULL);
+	int max  = 0;
+	int maxIndex = 0;
+	for( int i = 0; i < H.currSize; i++)
 	{
-		L->first->prev = tempNode;
-		L->first = tempNode;
+		if(H->heap[i] > max)
+		{
+			maxIndex = i;
+			max = H->heap[i];
+		}
 	}
-
-	/*printf("Successfully inserted a new node in the front \n");*/
+	/*Not Done Yet*/
 }
 
-/*void insertAtBack (ListHndl L, long data)
-{
-	NodePtr tempNode;
-	assert (L != NULL);
-	tempNode = malloc ( sizeof(NodeStruct) );
-	
-	tempNode->data = data;
-	tempNode->next = NULL;
-	tempNode->prev = L->last;
-	
-	if(L->last == NULL)
-	/*this means we're adding the first element, meaning L needs to have curr, first, & last assigned.*/
-	/*{
-		L->last = tempNode;
-		L->first = tempNode;
-		L->curr = tempNode;
-	}
-	else
-	{
-		L->last->next = tempNode;
-		L->last = tempNode;
-	}
-
-	/*printf("Successfully inserted a new node into the back \n");*/
-/*}
-
-void printList(ListHndl L)
-{
-	NodePtr tempCurr;
-	assert (L != NULL);
-	tempCurr = L->first;
-	while(tempCurr != NULL)
-	{
-		printf("%lu ", tempCurr->data);
-		tempCurr = tempCurr->next;
-	}
-	printf("\n");
-}
-
-void printListFile(ListHndl L, FILE *file)
-{
-	NodePtr tempCurr;
-	assert (L != NULL);
-	tempCurr = L->first;
-	while(tempCurr != NULL)
-	{
-		fprintf(file, "%lu ", tempCurr->data);
-		tempCurr = tempCurr->next;
-	}
-	fprintf(file, "\n");
-}  	
-
-void makeEmpty(ListHndl L)
-{
-	NodePtr tempCurr;
-	assert (L != NULL);
-	tempCurr = L->first;
-	L->curr = L->first;
-	while(L->curr != NULL)
-	{
-		tempCurr = L->curr->next;
-		free(L->curr); 
-		L->curr = tempCurr;
-	}
-	L->first = NULL;
-	L->curr = NULL;
-	L->last = NULL;
-	
-	/*printf("The list is now empty\n");*/
-/*}
-
-void moveFirst(ListHndl L)
-{
-	assert (L != NULL);
-	assert (L->first != NULL);
-	L->curr = L->first;
-}
-
-void moveLast(ListHndl L)
-{
-	assert (L != NULL);
-	assert (L->first != NULL);
-	L->curr = L->last;
-}
-
-void movePrev(ListHndl L)
-{
-	assert (L != NULL);
-	assert (L->curr != NULL);
-	L->curr = L->curr->prev;
-} 
-
-void moveNext(ListHndl L)
-{
-	assert (L != NULL);
-	assert (L->curr != NULL);
-	L->curr = L->curr->next;
-}
-
-void insertBeforeCurrent(ListHndl L, long data)
-{
-	NodePtr tempNode;
-	assert (L != NULL);
-	assert (L->curr != NULL);
-	
-	tempNode = malloc ( sizeof(NodeStruct) );
-	
-	tempNode->data = data;
-	tempNode->next = L->curr;
-	tempNode->prev = L->curr->prev;
-
-	L->curr->prev = tempNode;
-	if(L->first == L->curr)
-	{
-		L->first = tempNode;
-	}
-	else
-	{
-		tempNode->prev->next = tempNode;
-	}
-
-	/*printf("Successfully inserted a new node before the current node\n");*/
-	
-/*}
-
-void deleteFirst(ListHndl L)
-{
-	assert (L != NULL);
-	assert (L->first != NULL);
-	
-	if(L->curr == L->first)
-	{
-		L->curr = L->first->next;
-		free (L->first);
-		L->first = L->curr;
-	}
-	else
-	{
-		NodePtr tempCurr;
-		tempCurr = L->first->next;
-		free(L->first);
-		L->first = tempCurr;
-	}
-	L->first->prev = NULL;
-}
-
-void deleteLast(ListHndl L)
-{
-	assert (L != NULL);
-	assert (L->first != NULL);
-	
-	if(L->curr == L->last)
-	{
-		L->curr = L->last->prev;
-		free (L->last);
-		L->last = L->curr;
-	}
-	else
-	{
-		NodePtr tempCurr;
-		tempCurr = L->last->prev;
-		free(L->last);
-		L->last = tempCurr;
-	}
-	L->last->next = NULL;
-}
-
-void deleteCurrent(ListHndl L)
-{
-	assert (L != NULL);
-	assert (L->first != NULL);
-	L->curr->prev->next = L->curr->next;
-	L->curr->next->prev = L->curr->prev;
-	free (L->curr);
-}**/
+void insert(HeapHndl H, int priority);

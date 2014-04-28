@@ -17,17 +17,17 @@ void freeHeap (HeapHndl* H); /*Pre condition -> H was made with NewHeap*/
 /* This checks to see whether the HeapStruct points to any struct nodes. 
  * If it points to anything NOT null, it will return 1. 
  * If it all it points to are NULL things, it will return 0. */
-int isEmpty (HeapHndl H);
+Boolean isEmpty (HeapHndl H);
 
 /* This checks to see if every leaf in the tree is at the same depth and
 * their parents each have 2 nodes.*/
-int isFull(HeapHndl H);
+Boolean isFull(HeapHndl H);
 
 /* This will return the maximum value in the heap*/
-int maxValue(HeapHandl H)
+int maxValue(HeapHandl H);
 
 /*this will delete the maximum value in the heap*/
-void deleteMax(heapHndl H);
+void deleteMax(HeapHndl H);
 
 /*this will insert a value of priority priority into the heap*/
-void insert(heapHndl H, int priority);
+void insert(HeapHndl H, int priority);

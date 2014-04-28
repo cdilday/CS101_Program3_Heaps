@@ -1,14 +1,13 @@
-/* This will test the list ADT */
-#include "List.h"
+/* This will test the heap ADT */
+#include "heap.h"
 #include "myinclude.h"
 
 int main ()
 {
-	long testData = 98;
+	/*long testData = 98;
 	long testData2 = 97;
 	long testData3 = 99;
 
-	/* List creation */
 	ListHndl TheList;
 	TheList = NULL;
 	TheList = NewList();
@@ -79,5 +78,20 @@ int main ()
 
 	freeList(&TheList);
 	
-	return(0);
+	return(0);*/
 }
+/*4:53 PM - C7 the Out-of-Date Tutorial: okay so for insertion sort you take the values in keys[] and insert them sorted one-by-one into a new array right?
+4:54 PM - ClassicEvil: nope
+4:54 PM - C7 the Out-of-Date Tutorial: Yessssssss I'm good at this
+4:54 PM - ClassicEvil: you sort the items in the array
+4:55 PM - C7 the Out-of-Date Tutorial: I thought insertion sort was essentially just treating the unsorted array like input, and then going down and inserting it into a new array in a sorted fashion
+4:55 PM - ClassicEvil: true, and that's how you can do it. however, he wants to treat the smaller side of the array as the sorted part
+4:56 PM - C7 the Out-of-Date Tutorial: the smaller side?
+4:56 PM - ClassicEvil: like the indexes closer to 0
+4:56 PM - ClassicEvil: essentially, you take the first element, compare it to every element after it. the second it becomes less than an element, insert before that element it's smaller than
+4:57 PM - ClassicEvil: then instead of going back to the first element, take the second element and repeat
+4:57 PM - ClassicEvil: it's a while loops inside of a for loop
+4:57 PM - ClassicEvil: while loop
+
+http://www.programmingsimplified.com/c/source-code/c-program-insertion-sort*/
+
