@@ -4,9 +4,9 @@
 
 int main ()
 {
-	/*long testData = 98;
-	long testData2 = 97;
-	long testData3 = 99;
+	int testData = 98;
+	testData2 = 97;
+	testData3 = 99;
 
 	ListHndl TheList;
 	TheList = NULL;

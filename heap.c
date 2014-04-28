@@ -47,7 +47,7 @@ int maxValue(HeapHandl H)
 {
 	assert (H != NULL);
 	int max  = 0;
-	for( int i = 0; i < H.currSize; i++)
+	for( int i = 1; i < H.currSize; i++)
 	{
 		if(H->heap[i] > max)
 		{
@@ -62,7 +62,7 @@ void deleteMax(HeapHndl H)
 	assert (H != NULL);
 	int max  = 0;
 	int maxIndex = 0;
-	for( int i = 0; i < H.currSize; i++)
+	for( int i = 1; i < H.currSize; i++)
 	{
 		if(H->heap[i] > max)
 		{
@@ -70,7 +70,14 @@ void deleteMax(HeapHndl H)
 			max = H->heap[i];
 		}
 	}
-	/*Not Done Yet*/
+	H->heap[maxIndex] = NULL;
+	H->heap[maxIndex] = H->heap[currSize];
+	H->heap[currSize] = NULL;
 }
 
-void insert(HeapHndl H, int priority);
+void insert(HeapHndl H, int priority)
+{
+	assert (H != NULL);
+	H->heap[currsize+1] = priority;
+	H.currsize++;
+}
