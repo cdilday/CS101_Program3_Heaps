@@ -6,10 +6,16 @@
 int main ()
 {
 	int testData = 98;
-	testData2 = 97;
-	testData3 = 99;
-
-	ListHndl TheList;
+	int testData2 = 97;
+	int testData3 = 99;
+	int keys[] = { 4, 3, 5, 2, 1};
+	printf("Insertion sorting Array: ");
+	printKeys(keys, 5);
+	insertionSort(keys, 5);
+	printf("Array after insertion sort: ");
+	printKeys(keys, 5);
+	
+	/*ListHndl TheList;
 	TheList = NULL;
 	TheList = NewList();
 	

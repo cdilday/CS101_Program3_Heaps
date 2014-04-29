@@ -45,6 +45,7 @@ Boolean isEmpty(HeapHndl H)
 
 int maxValue(HeapHandl H)
 {
+//can be optimized once sorted
 	assert (H != NULL);
 	int max  = 0;
 	for( int i = 1; i < H.currSize; i++)
@@ -70,8 +71,10 @@ void deleteMax(HeapHndl H)
 			max = H->heap[i];
 		}
 	}
-	H->heap[maxIndex] = H->heap[currSize];
-	H->heap[currSize] = NULL;
+	H->heap[maxIndex] = H->heap[H.currSize];
+	H->heap[H.currSize] = NULL;
+	H.currSize--;
+	//Max Heapify here
 }
 
 void insert(HeapHndl H, int priority)
@@ -79,4 +82,8 @@ void insert(HeapHndl H, int priority)
 	assert (H != NULL);
 	H->heap[currsize+1] = priority;
 	H.currsize++;
+	// Max heapify here
+	
 }
+
+void MaxHeapify();
