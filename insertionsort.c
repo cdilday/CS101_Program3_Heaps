@@ -1,6 +1,6 @@
 /* Here will go the implementation of the Heap ADT */
 
-#include "inseertionsort.h"
+#include "insertionsort.h"
 #include "myinclude.h"
 #include <assert.h>
 
@@ -8,7 +8,9 @@
 void insertionSort(int keys[], int numKeys)
 {
 	int temp;
-	for (i = 1 ; i <= numkeys - 1; i++) 
+	int i;
+	int j;
+	for (i = 1 ; i <= numKeys - 1; i++) 
 	{
 		j = i;
 
@@ -24,9 +26,10 @@ void insertionSort(int keys[], int numKeys)
 
 void printKeys(int keys[], int numKeys)
 {
-	for (i = 0; i <= numkeys - 1; i++) 
+	int i;
+	for (i = 0; i <= numKeys - 1; i++) 
 	{
-		printf("%d ", array[i]);
+		printf("%d ", keys[i]);
 	}
 	printf("\n");
 }

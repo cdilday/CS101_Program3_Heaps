@@ -7,9 +7,9 @@
 
 typedef struct HeapStruct 
 {
-	int maxSize = 1000;
-	int currSize = 0;
-	int (*heap)[maxSize];
+	int maxSize;
+	int currSize;
+	int (*heap);
 } HeapStruct;
 
 /* CONSTRUCTORS / DESTRUCTORS */
@@ -27,28 +27,23 @@ void freeHeap (HeapHndl * H)
 	assert((*H) != NULL);
 	free((*H));
 	(*H) = NULL;
-	(*H).currSize = 0;
+	(*H)->currSize = 0;
 	printf( "Freed the heap! \n" );
 }
 
-Boolean isEmpty(HeapHndl H) 
+int isEmpty(HeapHndl H) 
 {
 	assert (H != NULL);
-	return (H.currSize == 0);
+	return (H->currSize == 0);
 }
 
-Boolean isEmpty(HeapHndl H) 
+int maxValue(HeapHndl H)
 {
 	assert (H != NULL);
-	return (H.currSize == H.maxSize );
-}
-
-int maxValue(HeapHandl H)
-{
-//can be optimized once sorted
-	assert (H != NULL);
-	int max  = 0;
-	for( int i = 1; i < H.currSize; i++)
+	int max;
+	int i;
+	max = 0;
+	for( i = 1; i < H->currSize; i++)
 	{
 		if(H->heap[i] > max)
 		{
@@ -61,9 +56,12 @@ int maxValue(HeapHandl H)
 void deleteMax(HeapHndl H)
 {
 	assert (H != NULL);
-	int max  = 0;
-	int maxIndex = 0;
-	for( int i = 1; i < H.currSize; i++)
+	int max;
+	int maxIndex;
+	int	i;
+	max = 0;
+	maxIndex = 0;
+	for( i = 1; i < H->currSize; i++)
 	{
 		if(H->heap[i] > max)
 		{
@@ -71,19 +69,80 @@ void deleteMax(HeapHndl H)
 			max = H->heap[i];
 		}
 	}
-	H->heap[maxIndex] = H->heap[H.currSize];
-	H->heap[H.currSize] = NULL;
-	H.currSize--;
-	//Max Heapify here
+	H->heap[maxIndex] = H->heap[H->currSize];
+	H->heap[H->currSize] = NULL;
+	H->currSize--;
+	MaxHeapify(H, 1);
 }
 
 void insert(HeapHndl H, int priority)
 {
 	assert (H != NULL);
-	H->heap[currsize+1] = priority;
-	H.currsize++;
-	// Max heapify here
+	H->heap[H->currSize + 1] = priority;
+	H->currSize++;
+	MaxHeapify(H, 1);
 	
 }
 
-void MaxHeapify();
+void MaxHeapify(HeapHndl H, int index)
+{
+	int l;
+	int r;
+	int maxLeft;
+	int maxRight;
+	int max;
+	int temp;
+	l = 2 * index;
+	r = 2 * index + 1;
+	maxLeft = FALSE;
+	maxRight = FALSE;
+	if( l > H->currSize || (H->heap[l] == NULL && H->heap[r] == NULL))
+	{
+		return;
+	}
+	else
+	{
+		max = H->heap[index];
+		if( H->heap[l] != NULL && H->heap[l] > max)
+		{
+			max = H->heap[l];
+			maxLeft = TRUE;
+		}
+		if( H->heap[r] != NULL && H->heap[r] > max)
+		{
+			max = H->heap[r];
+			maxRight = TRUE;
+			maxLeft = FALSE;
+		}
+		if (max == H->heap[index])
+		{
+			return;
+		}
+		else
+		{
+			temp = H->heap[index];
+			if(maxRight)
+			{
+					H->heap[index] = H->heap[r];
+					H->heap[r] = temp;
+					MaxHeapify(H, r);
+			}
+			else if(maxLeft)
+			{
+					H->heap[index] = H->heap[l];
+					H->heap[l] = temp;
+					MaxHeapify(H, l);
+			}
+		}
+	}
+}
+
+void printHeap(HeapHndl H)
+{
+	int i;
+	for (i = 1; i <= H->currSize; i++) 
+	{
+		printf("%d ", H->heap[i]);
+	}
+	printf("\n");
+}
