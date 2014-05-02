@@ -8,7 +8,7 @@ typedef struct HeapStruct * HeapHndl;
 
 /* This function will allocate memory for a new Heap, returning
  *a POINTER to the thing allocated */
-HeapHndl NewHeap ();
+HeapHndl NewHeap ( int max);
 
 /* This function ACCEPTS a pointer to a HeapHandle and will free
  * every Node in the Heap, as well as the Heap itself. */
@@ -32,7 +32,7 @@ void deleteMax(HeapHndl H);
 /*this will insert a value of priority priority into the heap*/
 void insert(HeapHndl H, int priority);
 
-/*turns the heap into a max heap. will be called whenever the heap changes*/
-void MaxHeapify(HeapHndl H, int index);
+/*turns the heap into a max heap. will be called whenever the heap changes
+void MaxHeapify(HeapHndl H, int index);*/
 
 void printHeap(HeapHndl H);

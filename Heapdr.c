@@ -5,15 +5,21 @@
 
 int main ()
 {
-	/*int testData = 98;
-	int testData2 = 97;
-	int testData3 = 99;*/
+	HeapHndl theHeap;
+	theHeap = NULL;
 	int keys[] = { 4, 3, 5, 2, 1};
 	printf("Insertion sorting Array: ");
 	printKeys(keys, 5);
 	insertionSort(keys, 5);
 	printf("Array after insertion sort: ");
 	printKeys(keys, 5);
+	
+	printf("next testing out the heap\n");
+	theHeap = NewHeap( 6);
+	insert(theHeap, 4);
+	insert(theHeap, 5);
+	insert(theHeap, 3);
+	printHeap(theHeap);
 	
 	/*ListHndl TheList;
 	TheList = NULL;
