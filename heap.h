@@ -32,6 +32,8 @@ void deleteMax (HeapHndl H);
 /*this will insert a value of priority priority into the heap*/
 void insert (HeapHndl H, int priority);
 
+/*debugging purposes only, prints the whole heap*/
 void printHeap(HeapHndl H);
 
+/*debugging purposes only, prints a single element of the heap*/
 void printAt(HeapHndl H, int index);

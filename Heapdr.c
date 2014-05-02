@@ -54,6 +54,7 @@ int main ()
 	else
 		printf("The heap is not empty\n");
 	printHeap(theHeap);
+	printf("Max Value is %d\n", maxValue(theHeap));
 	printf("deleting max...\n");
 	deleteMax(theHeap);
 	if(isFull(theHeap))
@@ -63,6 +64,7 @@ int main ()
 	else
 		printf("The heap is not full\n");
 	printHeap(theHeap);
+	freeHeap(&theHeap);
 
 	return(0);
 }

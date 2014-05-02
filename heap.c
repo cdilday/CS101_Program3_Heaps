@@ -29,7 +29,6 @@ void freeHeap (HeapHndl * H)
 	assert((*H) != NULL);
 	free((*H));
 	(*H) = NULL;
-	(*H)->currSize = 0;
 	printf( "Freed the heap! \n" );
 }
 
@@ -61,42 +60,45 @@ void deleteMax(HeapHndl H)
 {
 	int index;
 	int curr;
-	int tempMax;
+	int temp;
 	int lorr;
+	int max;
 	assert (H != NULL);
 	H->heap[1] = H->heap[H->currSize];
 	H->heap[H->currSize] = NULL;
 	H->currSize--;
 	curr = H->heap[1];
 	index = 1;
-	while( (index * 2 <= H->currSize && (H->heap[2*index] > curr)) || ((index * 2) + 1 <= H->currSize && (H->heap[2*index + 1] > curr)))
+	while( 2 * index <= H->currSize)
 	{
-		tempMax = curr;
-		if (H->heap[2*index] > tempMax)
+		max = curr;
+		if ( H->heap[2 * index] > max)
 		{
+			max = H->heap[2*index];
 			lorr = 1;
-			tempMax = H->heap[2*index];
 		}
-		if ((index * 2) + 1 <= H->currSize && H->heap[2*index + 1] > tempMax)
+		if ( (2 * index) + 1 <= H->currSize && H->heap[(2 * index) + 1] > max)
 		{
+			max = H->heap[(2 * index) + 1];
 			lorr = 2;
-			tempMax = H->heap[2*index + 1];
 		}
-		if (tempMax != curr)
+		
+		if (lorr == 1)
 		{
-			if(lorr == 1)
-			{
-				H->heap[index] = tempMax;
-				H->heap[2*index] = curr;
-				index = 2*index;
-			}
-			else if(lorr == 1)
-			{
-				H->heap[index] = tempMax;
-				H->heap[2*index + 1] = curr;
-				index = 2*index + 1;
-			}
+			temp = curr;
+			H->heap[index] = max;
+			H->heap[2*index] = curr;
+			index = 2*index;
 		}
+		else if (lorr == 2)
+		{
+			temp = curr;
+			H->heap[index] = max;
+			H->heap[(2*index) + 1] = curr;
+			index = (2*index) + 1;
+		}
+		else
+			break;
 	}
 	
 }
