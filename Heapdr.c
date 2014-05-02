@@ -1,5 +1,6 @@
 /* This will test the heap ADT */
 #include "heap.h"
+#include "HeapSort.h"
 #include "insertionsort.h"
 #include "myinclude.h"
 
@@ -65,6 +66,16 @@ int main ()
 		printf("The heap is not full\n");
 	printHeap(theHeap);
 	freeHeap(&theHeap);
-
+	
+	printf("Now for the heap sort \nBefore: ");
+	keys[0] = 4;
+	keys[1] = 3;
+	keys[2] = 5;
+	keys[3] = 2;
+	keys[4] = 1;
+	printKeys(keys, 5);
+	heapSort(keys, 5);
+	printf("After: ");
+	printKeys(keys, 5);
 	return(0);
 }
