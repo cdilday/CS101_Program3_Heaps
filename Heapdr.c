@@ -7,7 +7,12 @@ int main ()
 {
 	HeapHndl theHeap;
 	theHeap = NULL;
-	int keys[] = { 4, 3, 5, 2, 1};
+	int keys[5];
+	keys[0] = 4;
+	keys[1] = 3;
+	keys[2] = 5;
+	keys[3] = 2;
+	keys[4] = 1;
 	printf("Insertion sorting Array: ");
 	printKeys(keys, 5);
 	insertionSort(keys, 5);
@@ -34,9 +39,9 @@ int main ()
 	insert(theHeap, 6);
 	insert(theHeap, 2);
 	printHeap(theHeap);
+	insert(theHeap, 7);
 	printHeap(theHeap);
-	printHeap(theHeap);
-	/*if(isFull(theHeap))
+	if(isFull(theHeap))
 	{
 		printf("The heap is full\n");
 	}
@@ -47,16 +52,17 @@ int main ()
 		printf("The heap is empty\n");
 	}
 	else
-		printf("The heap is not empty\n");*/
-	
-	/*printf("deleting max...\n");
-	deleteMax(theHeap);*/
+		printf("The heap is not empty\n");
+	printHeap(theHeap);
+	printf("deleting max...\n");
+	deleteMax(theHeap);
 	if(isFull(theHeap))
 	{
 		printf("The heap is full\n");
 	}
 	else
 		printf("The heap is not full\n");
+	printHeap(theHeap);
 
 	return(0);
 }

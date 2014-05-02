@@ -32,7 +32,6 @@ void deleteMax (HeapHndl H);
 /*this will insert a value of priority priority into the heap*/
 void insert (HeapHndl H, int priority);
 
-/*turns the heap into a max heap. will be called whenever the heap changes
-void MaxHeapify(HeapHndl H, int index);*/
-
 void printHeap(HeapHndl H);
+
+void printAt(HeapHndl H, int index);

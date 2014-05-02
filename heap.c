@@ -12,8 +12,6 @@ typedef struct HeapStruct
 	int (*heap);
 } HeapStruct;
 
-/* CONSTRUCTORS / DESTRUCTORS */
-
 HeapHndl NewHeap ( int max) 
 {
 	HeapHndl tempHeap;
@@ -21,7 +19,8 @@ HeapHndl NewHeap ( int max)
 	printf(" New Heap created! \n ");
 	tempHeap->maxSize = max;
 	int temp [max + 1];
-	tempHeap->heap = temp;
+	tempHeap->currSize = 0;
+	tempHeap->heap = malloc (sizeof(temp));
 	return tempHeap;
 }
 
@@ -37,13 +36,19 @@ void freeHeap (HeapHndl * H)
 int isEmpty(HeapHndl H) 
 {
 	assert (H != NULL);
-	return (H->currSize == 0);
+	if (H->currSize == 0)
+		return 1;
+	else
+		return 0;
 }
 
 int isFull(HeapHndl H) 
 {
 	assert (H != NULL);
-	return (H->currSize == H->maxSize);
+	if (H->currSize == H->maxSize)
+		return 1;
+	else
+		return 0;
 }
 
 int maxValue(HeapHndl H)
@@ -64,7 +69,7 @@ void deleteMax(HeapHndl H)
 	H->currSize--;
 	curr = H->heap[1];
 	index = 1;
-	while( (H->heap[2*index] != NULL && (H->heap[2*index] > curr)) || (H->heap[2*index + 1] != NULL && (H->heap[2*index + 1] > curr)))
+	while( (index * 2 <= H->currSize && (H->heap[2*index] > curr)) || ((index * 2) + 1 <= H->currSize && (H->heap[2*index + 1] > curr)))
 	{
 		tempMax = curr;
 		if (H->heap[2*index] > tempMax)
@@ -72,7 +77,7 @@ void deleteMax(HeapHndl H)
 			lorr = 1;
 			tempMax = H->heap[2*index];
 		}
-		if (H->heap[2*index + 1] > tempMax)
+		if ((index * 2) + 1 <= H->currSize && H->heap[2*index + 1] > tempMax)
 		{
 			lorr = 2;
 			tempMax = H->heap[2*index + 1];
@@ -104,7 +109,7 @@ void insert(HeapHndl H, int priority)
 	assert (H->currSize != H-> maxSize);
 	index = H->currSize + 1;
 	H->heap[index] = priority;
-	H->currSize++;
+	H->currSize += 1;
 	while( index/2 != 0 && H->heap[(index / 2)] < H->heap[index])
 	{
 		temp = H->heap[(index / 2)];
@@ -122,5 +127,10 @@ void printHeap(HeapHndl H)
 	{
 		printf("%d ", H->heap[i]);
 	}
-	printf("\n");
+	printf(" \n");
+}
+
+void printAt(HeapHndl H, int index)
+{
+	printf("%d ", H->heap[index]);
 }
