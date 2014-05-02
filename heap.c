@@ -16,7 +16,7 @@ HeapHndl NewHeap ( int max)
 {
 	HeapHndl tempHeap;
 	tempHeap = malloc ( sizeof(HeapStruct) );
-	printf(" New Heap created! \n ");
+	/*printf(" New Heap created! \n ");*/
 	tempHeap->maxSize = max;
 	int temp [max + 1];
 	tempHeap->currSize = 0;
@@ -27,9 +27,10 @@ HeapHndl NewHeap ( int max)
 void freeHeap (HeapHndl * H)
 {
 	assert((*H) != NULL);
+	free((*H)->heap);
 	free((*H));
 	(*H) = NULL;
-	printf( "Freed the heap! \n" );
+	/*printf( "Freed the heap! \n" );*/
 }
 
 int isEmpty(HeapHndl H) 
