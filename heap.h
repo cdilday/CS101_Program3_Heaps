@@ -21,16 +21,16 @@ int isEmpty (HeapHndl H);
 
 /* This checks to see if every leaf in the tree is at the same depth and
 * their parents each have 2 nodes.*/
-int isFull(HeapHndl H);
+int isFull (HeapHndl H);
 
 /* This will return the maximum value in the heap*/
-int maxValue(HeapHndl H);
+int maxValue (HeapHndl H);
 
 /*this will delete the maximum value in the heap*/
-void deleteMax(HeapHndl H);
+void deleteMax (HeapHndl H);
 
 /*this will insert a value of priority priority into the heap*/
-void insert(HeapHndl H, int priority);
+void insert (HeapHndl H, int priority);
 
 /*turns the heap into a max heap. will be called whenever the heap changes
 void MaxHeapify(HeapHndl H, int index);*/
