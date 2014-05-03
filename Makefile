@@ -2,6 +2,9 @@
 
 sortPrint : sortPrint.o heap.o insertionsort.o HeapSort.o
 	gcc -ansi -Wall -Wextra -pedantic -o sortPrint sortPrint.o heap.o insertionsort.o HeapSort.o
+	
+sortComp : sortComp.o heap.o insertionsort.o HeapSort.o
+	gcc -ansi -Wall -Wextra -pedantic -o sortComp sortComp.o heap.o insertionsort.o HeapSort.o
 
 Heapdr : Heapdr.o heap.o insertionsort.o HeapSort.o
 	gcc -ansi -Wall -Wextra -pedantic -o Heapdr Heapdr.o heap.o insertionsort.o HeapSort.o
@@ -20,7 +23,10 @@ Heapdr.o : heap.h Heapdr.c
 
 sortPrint.o: heap.h sortPrint.c
 	gcc -c -ansi -Wall -Wextra -pedantic sortPrint.c	
+	
+sortComp.o: heap.h sortComp.c
+	gcc -c -ansi -Wall -Wextra -pedantic sortComp.c	
 
 clean :
-	rm heap.o Heapdr Heapdr.o insertionsort.o HeapSort.o
+	rm heap.o Heapdr Heapdr.o insertionsort.o HeapSort.o sortComp.o
 	

@@ -11,26 +11,33 @@ typedef struct HeapStruct * HeapHndl;
 HeapHndl NewHeap ( int max);
 
 /* This function ACCEPTS a pointer to a HeapHandle and will free
- * every Node in the Heap, as well as the Heap itself. */
+ * the heap array pointer, and then the heap itself*/
 void freeHeap (HeapHndl* H); /*Pre condition -> H was made with NewHeap*/
 
-/* This checks to see whether the HeapStruct points to any struct nodes. 
- * If it points to anything NOT null, it will return 1. 
- * If it all it points to are NULL things, it will return 0. */
-int isEmpty (HeapHndl H);
+/* This checks to see whether the HeapStruct has any elements 
+ * If it has elements, it will return 0 
+ * If it has no elements it will return 1 */
+int isEmpty (HeapHndl H); /*Pre condition -> H was made with NewHeap*/
 
-/* This checks to see if every leaf in the tree is at the same depth and
-* their parents each have 2 nodes.*/
-int isFull (HeapHndl H);
+/* This checks to see if the amount of elements is the maximum size of the heap
+* If the current size is the maximum size, it returns 1
+* If the current size is less than the maximum size, it returns 0*/
+int isFull (HeapHndl H); /*Pre condition -> H was made with NewHeap*/
 
 /* This will return the maximum value in the heap*/
-int maxValue (HeapHndl H);
+int maxValue (HeapHndl H);/*Pre condition -> H was made with NewHeap*/
 
 /*this will delete the maximum value in the heap*/
-void deleteMax (HeapHndl H);
+void deleteMax (HeapHndl H);/*Pre conditions -> H was made with NewHeap
+* -> there was an element in the heap to be the maximum
+* Post condition -> The heap now has the next highest value at max
+* -> and still has the properties of a max heap*/
 
 /*this will insert a value of priority priority into the heap*/
-void insert (HeapHndl H, int priority);
+void insert (HeapHndl H, int priority);/*Pre conditions -> H was made with NewHeap
+* -> the heap is not full
+* Post condition -> The heap now contains an additional element and still
+* -> has the properties of a max heap*/
 
 /*debugging purposes only, prints the whole heap*/
 void printHeap(HeapHndl H);

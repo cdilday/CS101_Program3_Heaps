@@ -65,6 +65,7 @@ void deleteMax(HeapHndl H)
 	int lorr;
 	int max;
 	assert (H != NULL);
+	assert (H->heap[1] != NULL);
 	H->heap[1] = H->heap[H->currSize];
 	H->heap[H->currSize] = NULL;
 	H->currSize--;
