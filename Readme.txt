@@ -10,4 +10,4 @@ After this, it checks to make sure both arrays are fully sorted.
 
 sortComp reads in the file and sorts similar to sortPrint but instead of printing it calculates the time taken for the 
 insertion sort and then the Heap Sort. Unfortunately since the Unix timeshare is so fast it's impossible to get accurate time until you get into the thousands
-of numbers, so I used "test4.txt" to test it out.
+of numbers.
